@@ -1,0 +1,37 @@
+body
+{
+    margin-left: 0.3cm;
+    margin-right: 0.3cm;
+}
+
+header, nav
+{
+    border-radius: 0;
+}
+
+article 
+{
+    margin-left: 0.5cm;
+    padding-bottom: 0.5cm;
+}
+
+article h4
+{
+    border-bottom: 1px solid black;
+}
+
+
+.brand img 
+{
+    position: relative;
+    top: -4px;
+}   
+
+footer
+{
+    border-top: 1px solid black; 
+    margin-top: 70px;
+    
+    
+    text-align: center;
+}

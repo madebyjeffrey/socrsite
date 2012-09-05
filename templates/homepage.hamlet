@@ -1,0 +1,14 @@
+<div .well>    
+    <p>Welcome to the Student Operated Computing Resources (SOCR), a student funded computing resource group offering web hosting, shell access, and other technical services upon request.
+
+<h1>News
+
+$if null newsitems
+    <p>No news.
+$else
+    $forall Entity id entry <- newsitems
+        <article>
+            <h4>#{newsItemDate entry}
+            
+            <p>#{newsItemContent entry}
+                

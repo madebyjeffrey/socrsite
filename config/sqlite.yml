@@ -1,0 +1,20 @@
+Default: &defaults
+  database: socrsite.sqlite3
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Testing:
+  database: socrsite_test.sqlite3
+  <<: *defaults
+
+Staging:
+  database: socrsite_staging.sqlite3
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  database: socrsite_production.sqlite3
+  poolsize: 100
+  <<: *defaults

@@ -24,11 +24,11 @@ import Control.Applicative ((<$>), (<*>), pure)
 import Data.Text (Text)
 import Settings.StaticFiles
 import Settings.Development
-import Data.Time (UTCTime)
-import Data.Time.Format (formatTime)
-import Text.Blaze (ToMarkup, toMarkup)
-import Text.Blaze.Internal (string)
-import System.Locale (defaultTimeLocale)
+--import Data.Time (UTCTime)
+--import Data.Time.Format (formatTime)
+--import Text.Blaze (ToMarkup, toMarkup)
+--import Text.Blaze.Internal (string)
+--import System.Locale (defaultTimeLocale)
 
 #if __GLASGOW_HASKELL__ < 704
 infixr 5 <>

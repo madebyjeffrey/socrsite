@@ -8,15 +8,16 @@ Email
     verkey Text Maybe
     UniqueEmail email
 NewsItem
-    date    UTCTime default=CURRENT_TIME
-    title   String
-    content String
-    author  String
+    date    Text  
+    title   Text
+    content Text
+    author  Text
 Document
-    title     String
-    slug      String
-    content   String
-    author    String
-    processor String
+    title     Text
+    slug      Text
+    content   Text
+    author    Text
+    processor Text
 
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)
+-- UTCTime

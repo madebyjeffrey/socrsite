@@ -1,12 +1,21 @@
-<div .well>    
+<section .well style="min-height: 100px">
+    <img src=@{StaticR img_socrlogobig_png} width="100" align="left" style="margin-right: 0.5cm">    
     <p>Welcome to the Student Operated Computing Resources (SOCR), a student funded computing resource group offering web hosting, shell access, and other technical services upon request.
 
+<p>Your current auth ID: #{show maid}
+$maybe _ <- maid
+    <p>
+        <a href=@{AuthR LogoutR}>Logout
+$nothing
+    <p>
+        <a href=@{AuthR LoginR}>Go to the login page
+    
 <h1>News
 
 $if null newsitems
     <p>No news.
 $else
-    $forall Entity id entry <- newsitems
+    $forall Entity _ entry <- newsitems
         <article>
             <h4>#{newsItemDate entry}
             

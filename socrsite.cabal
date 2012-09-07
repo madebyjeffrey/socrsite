@@ -29,6 +29,7 @@ library
                      Settings.StaticFiles
                      Settings.Development
                      Handler.Home
+                     Handler.Document
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -79,6 +80,8 @@ library
                  , old-locale                    >= 1.0.0.4
                  , blaze-markup                  >= 0.5.1.0
                  , data-default
+                 , markdown                      >= 0.1.0.1
+                 , persistent-postgresql         >= 1.0.0
 
 executable         socrsite
     if flag(library-only)

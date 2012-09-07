@@ -1,7 +1,7 @@
 body
 {
-    margin-left: 0.3cm;
-    margin-right: 0.3cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
 }
 
 header, nav
@@ -34,4 +34,22 @@ footer
     
     
     text-align: center;
+}
+
+
+.buttonwrap
+{
+    margin-top: 6px;
+/*    text-align: center; */
+/*    width: 300px; */
+}
+
+.buttonwrap a
+{
+    margin-bottom: 40px;
+}
+
+.buttonwrap a:visited, .buttonwrap a:hover
+{
+    color: white;
 }

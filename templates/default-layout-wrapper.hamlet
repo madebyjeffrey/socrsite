@@ -41,11 +41,15 @@ $newline never
                 <nav class="nav-collapse collapse">
                     <ul class="nav">
                         <li class="active">
-                            <a href="#">Main
+                            <a href="/">Main
                         <li>
-                            <a href="#">Documents
+                            <a href="/page/documents">Documents
                         <li>
-                            <a href="#">About
+                            <a href="/page/about">About
+                        <li>
+                            <div .buttonwrap>
+                                <a href="#" class="persona-button orange">
+                                    <span>Sign in with Persona
 
         ^{pageBody pc}
         

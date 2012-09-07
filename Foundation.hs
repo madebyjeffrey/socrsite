@@ -18,7 +18,6 @@ import Yesod
 import Yesod.Static
 import Yesod.Auth
 import Yesod.Auth.BrowserId
-import Yesod.Auth.GoogleEmail
 import Yesod.Default.Config
 import Yesod.Default.Util (addStaticContentExternal)
 import Network.HTTP.Conduit (Manager)
@@ -32,6 +31,7 @@ import Text.Jasmine (minifym)
 import Web.ClientSession (getKey)
 import Text.Hamlet (hamletFile)
 import Text.Lucius (luciusFile)
+import Data.Text (Text)
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -95,6 +95,7 @@ instance Yesod App where
         pc <- widgetToPageContent $ do
             $(widgetFile "normalize")
             addStylesheet $ StaticR css_bootstrap_css
+            addStylesheet $ StaticR css_personabuttons_css
             toWidget $(luciusFile "templates/default.lucius")  
             addScript $ StaticR js_jquery_1_8_1_min_js
             addScript $ StaticR js_bootstrap_js
@@ -129,23 +130,26 @@ instance YesodPersist App where
             f
             (connPool master)
 
+
 instance YesodAuth App where
-    type AuthId App = UserId
+    type AuthId App = Text
 
     -- Where to send a user after successful login
     loginDest _ = HomeR
     -- Where to send a user after logout
     logoutDest _ = HomeR
 
-    getAuthId creds = runDB $ do
+    getAuthId = return . Just . credsIdent
+    
+{-    getAuthId creds = runDB $ do
         x <- getBy $ UniqueUser $ credsIdent creds
         case x of
             Just (Entity uid _) -> return $ Just uid
             Nothing -> do
-                fmap Just $ insert $ User (credsIdent creds) Nothing
+                fmap Just $ insert $ User (credsIdent creds) Nothing  -}
 
     -- You can add other plugins like BrowserID, email or OAuth here
-    authPlugins _ = [authBrowserId, authGoogleEmail]
+    authPlugins _ = [authBrowserId] 
 
     authHttpManager = httpManager
 

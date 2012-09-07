@@ -1,6 +1,9 @@
 {-# LANGUAGE TupleSections, OverloadedStrings #-}
 module Handler.Home where
 
+import Yesod.Auth
+import Yesod.Auth.BrowserId
+
 import Import
 
 -- This is a handler function for the GET request method on the HomeR
@@ -12,10 +15,12 @@ import Import
 -- inclined, or create a single monolithic file.
 getHomeR :: Handler RepHtml
 getHomeR = do
+    maid <- maybeAuthId
+    
     newsitems <- runDB $ selectList [] [Desc NewsItemDate]
     let handlerName = "getHomeR" :: Text
     defaultLayout $ do
         aDomId <- lift newIdent
-        setTitle "Welcome To Yesod!"
+        setTitle "Student Operated Computing Resources"
         $(widgetFile "homepage")
 

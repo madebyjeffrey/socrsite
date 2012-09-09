@@ -1,0 +1,24 @@
+Default: &defaults
+  user: socr2
+  password: socr2
+  host: localhost
+  port: 5432
+  database: socr2
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Testing:
+  connstr: service=local
+  <<: *defaults
+
+Staging:
+  connstr: service=local
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  connstr: service=local
+  poolsize: 100
+  <<: *defaults

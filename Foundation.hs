@@ -133,11 +133,15 @@ instance YesodPersist App where
 
 instance YesodAuth App where
     type AuthId App = Text
-
+    
+    -- go back to the page that initiated the login
+    redirectToReferer _ = True
+    -- these two are overriden. 
     -- Where to send a user after successful login
     loginDest _ = HomeR
     -- Where to send a user after logout
     logoutDest _ = HomeR
+
 
     getAuthId = return . Just . credsIdent
     
@@ -168,3 +172,5 @@ getExtra = fmap (appExtra . settings) getYesod
 -- wiki:
 --
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
+
+login =  $(widgetFile "login")

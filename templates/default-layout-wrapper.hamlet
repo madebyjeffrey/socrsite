@@ -26,35 +26,9 @@ $newline never
         <script>
           document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
     <body>
-        <header .navbar>
-            <nav .navbar-inner>
-                <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
-                    <span class="icon-bar">
-                    <span class="icon-bar">
-                    <span class="icon-bar">
-
-                
-                <a .brand href="#">
-                    <img src=@{StaticR img_socrlogo2_png} height="30" width="30">
-                    &nbsp;
-                    SOCR
-                <nav class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li class="active">
-                            <a href="/">Main
-                        <li>
-                            <a href="/page/documents">Documents
-                        <li>
-                            <a href="/page/about">About
-                        <li>
-                            <div .buttonwrap>
-                                <a href="#" class="persona-button orange">
-                                    <span>Sign in with Persona
 
         ^{pageBody pc}
         
-        <footer .footer>
-            <aside>Copyright 2012, Jeffrey Drake and Matthew Renaud.
 
     
         $maybe analytics <- extraAnalytics $ appExtra $ settings master

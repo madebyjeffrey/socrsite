@@ -1,0 +1,3 @@
+<div .buttonwrap>
+    <a href="javascript:navigator.id.getVerifiedEmail(function(a){if(a)document.location='http://socr.uwindsor.ca:443/auth/page/browserid/'+a});" class="persona-button orange">
+        <span>Sign in with Persona

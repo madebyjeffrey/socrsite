@@ -3,6 +3,7 @@ module Handler.Home where
 
 import Yesod.Auth
 import Yesod.Auth.BrowserId
+import Web.Authenticate.BrowserId
 
 import Import
 
@@ -16,11 +17,15 @@ import Import
 getHomeR :: Handler RepHtml
 getHomeR = do
     maid <- maybeAuthId
+    let browserid = authBrowserId
     
     newsitems <- runDB $ selectList [] [Desc NewsItemDate]
     let handlerName = "getHomeR" :: Text
     defaultLayout $ do
         aDomId <- lift newIdent
+--        tm <- lift getRouteToMaster
+--        let n =  (apLogin browserid) tm
         setTitle "Student Operated Computing Resources"
+        addScriptRemote browserIdJs
         $(widgetFile "homepage")
 

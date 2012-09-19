@@ -1,3 +1,15 @@
-<div .buttonwrap>
-    <a href="javascript:navigator.id.getVerifiedEmail(function(a){if(a)document.location='http://socr.uwindsor.ca:443/auth/page/browserid/'+a});" class="persona-button orange">
-        <span>Sign in with Persona
+$maybe myid <- credential
+    <li .dropdown>
+        <a href="" .dropdown-toggle data-toggle="dropdown" role="button">#{toHtml myid}
+        <ul .dropdown-menu>
+            <li>
+                <a href=@{AdminProfileR}>Profile
+            <li .divider>
+            <li>
+                <a href=@{AuthR LogoutR}>Logout
+$nothing
+    <li>
+        <div .buttonwrap .right>
+            <a href="javascript:navigator.id.getVerifiedEmail(function(a){if(a)document.location='http://socr.uwindsor.ca:443/auth/page/browserid/'+a});" class="persona-button orange">
+                <span>Sign in with Persona
+

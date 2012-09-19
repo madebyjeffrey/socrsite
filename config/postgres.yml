@@ -1,9 +1,9 @@
 Default: &defaults
-  user: socr2
-  password: socr2
+  user: socr
+  password: abracadabra
   host: localhost
   port: 5432
-  database: socr2
+  database: socr
   poolsize: 10
 
 Development:

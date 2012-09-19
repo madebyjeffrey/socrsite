@@ -1,25 +1,17 @@
-<header .navbar>
+<header .navbar .navbar-fixed-top>
     <nav .navbar-inner>
-        <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
-            <span class="icon-bar">
-            <span class="icon-bar">
-            <span class="icon-bar">
-
-        
-        <a .brand href="#">
+        <a .brand href="http://socr.uwindsor.ca/">
             <img src=@{StaticR img_socrlogo2_png} height="30" width="30">
             &nbsp;
             SOCR
-        <nav class="nav-collapse collapse">
-            <ul class="nav">
-                <li class="active">
-                    <a href="/">Main
-                <li>
-                    <a href="/page/documents">Documents
-                <li>
-                    <a href="/page/about">About
-                <li>
-                    ^{login}
+        <ul .nav .pull-right>
+            <li class="active">
+                <a href="/">Main
+            <li>
+                <a href="/page/documents">Documents
+            <li>
+                <a href="/page/about">About
+            ^{login curauth}
 
 ^{widget}
                 

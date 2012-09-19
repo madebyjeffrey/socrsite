@@ -21,6 +21,7 @@ import Yesod.Auth.BrowserId
 import Yesod.Default.Config
 import Yesod.Default.Util (addStaticContentExternal)
 import Network.HTTP.Conduit (Manager)
+import Control.Applicative
 import qualified Settings
 import qualified Database.Persist.Store
 import Settings.StaticFiles
@@ -30,7 +31,6 @@ import Model
 import Text.Jasmine (minifym)
 import Web.ClientSession (getKey)
 import Text.Hamlet (hamletFile)
-import Text.Lucius (luciusFile)
 import Data.Text (Text)
 
 -- | The site argument for your application. This can be a good place to
@@ -85,6 +85,8 @@ instance Yesod App where
     defaultLayout widget = do
         master <- getYesod
         mmsg <- getMessage
+        
+        curauth <- maybeAuthId
 
         -- We break up the default layout into two components:
         -- default-layout is the contents of the body tag, and
@@ -96,7 +98,7 @@ instance Yesod App where
             $(widgetFile "normalize")
             addStylesheet $ StaticR css_bootstrap_css
             addStylesheet $ StaticR css_personabuttons_css
-            toWidget $(luciusFile "templates/default.lucius")  
+
             addScript $ StaticR js_jquery_1_8_1_min_js
             addScript $ StaticR js_bootstrap_js
             $(widgetFile "default-layout")
@@ -143,14 +145,23 @@ instance YesodAuth App where
     logoutDest _ = HomeR
 
 
-    getAuthId = return . Just . credsIdent
+--    getAuthId = return . Just . credsIdent
     
-{-    getAuthId creds = runDB $ do
-        x <- getBy $ UniqueUser $ credsIdent creds
-        case x of
-            Just (Entity uid _) -> return $ Just uid
-            Nothing -> do
-                fmap Just $ insert $ User (credsIdent creds) Nothing  -}
+    getAuthId creds = runDB $ do
+        let email = credsIdent creds
+        x <- getBy $ UniqueUser email
+        num <- count [UserEmail !=. ""]                     -- do we have users?
+        case (x, num) of
+            (Just (Entity _ _), _) -> pure $ Just email   -- existing user
+            (Nothing, 0) -> do  -- first user
+                _ <- insertUnique $ User email "" 0         -- assume 0 means highest level
+                pure $ Just email                       -- if there are no entries, then there is no problem
+            (Nothing, _) -> do  -- new user, but not first
+                _ <- insertUnique $ User email "" 100 -- assume 100 is lowest
+                pure $ Just email
+
+                
+          --        fmap Just $ insert $ User (credsIdent creds) Nothing  -}
 
     -- You can add other plugins like BrowserID, email or OAuth here
     authPlugins _ = [authBrowserId] 
@@ -173,4 +184,9 @@ getExtra = fmap (appExtra . settings) getYesod
 --
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
 
-login =  $(widgetFile "login")
+login :: (master ~ App, YesodAuth App) => Maybe (AuthId App) -> GWidget sub master ()
+login credential = do
+    let id' = case credential of
+                Nothing -> ""
+                Just id_ -> show id_
+    $(widgetFile "login")

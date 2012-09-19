@@ -4,5 +4,18 @@
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
-/               HomeR     GET
-/page/#Text     DocumentR GET
+/               HomeR           GET
+/page/#Text     DocumentR       GET
+
+/admin/profile  AdminProfileR   GET 
+/admin/data/profile/#Text AdminDataProfileR  GET POST
+
+/admin/data/news/count      AdminNewsCountR GET
+/admin/data/news/list       AdminNewsListR  GET
+/admin/data/news/item/#Int  AdminNewsItemR  GET POST
+/admin/data/news            AdminNewsR      PUT
+
+/admin/data/pages/count     AdminPagesCountR GET
+/admin/data/pages/list      AdminPagesListR  GET
+/admin/data/pages/item/#Int AdminPagesItemR  GET POST
+/admin/data/pages           AdminPagesR      PUT

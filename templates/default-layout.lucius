@@ -2,6 +2,7 @@ body
 {
     margin-left: 1cm;
     margin-right: 1cm;
+    padding-top: 60px; /* account for fixed bar at top */
 }
 
 header, nav
@@ -25,6 +26,7 @@ article h4
 {
     position: relative;
     top: -4px;
+    left: 13px;
 }   
 
 footer
@@ -39,15 +41,17 @@ footer
 
 .buttonwrap
 {
-    margin-top: 6px;
+    padding: 7px 0px 7px 0px;
+    vertical-align: middle;
+/*    margin-top: 6px; */
 /*    text-align: center; */
 /*    width: 300px; */
 }
 
-.buttonwrap a
+/*.buttonwrap a
 {
     margin-bottom: 40px;
-}
+}*/
 
 .buttonwrap a:visited, .buttonwrap a:hover
 {

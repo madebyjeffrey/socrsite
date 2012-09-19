@@ -1,0 +1,26 @@
+
+<h1>Profile
+<hr>
+
+<section .well>
+    <div .row>
+        <div .span2>
+            <label>Name
+        <div .span4>
+            <input type="text" id="nameField">
+    <div .row>
+        <div .span2>
+            <label>E-Mail
+        <div .span4>
+            <input type="text" id="emailField">
+    <div .row>
+        <div .span2>
+            <label>Access Level
+        <div .span4>
+            <input type="text" id="accessField">
+    <div .row>
+        <div .span2>
+            <label>
+        <div .span4>
+            <div .btn-group>
+                <button .btn>Update

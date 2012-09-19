@@ -1,0 +1,4 @@
+function getIdent()
+{
+    return #{id'};
+}

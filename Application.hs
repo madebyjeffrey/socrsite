@@ -20,6 +20,8 @@ import Network.HTTP.Conduit (newManager, def)
 -- Don't forget to add new modules to your cabal file!
 import Handler.Home
 import Handler.Document
+import Handler.Admin
+import Handler.AdminData
 
 -- This line actually creates our YesodSite instance. It is the second half
 -- of the call to mkYesodData which occurs in Foundation.hs. Please see

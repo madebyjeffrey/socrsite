@@ -10,6 +10,8 @@ module Import
 #if __GLASGOW_HASKELL__ < 704
     , (<>)
 #endif
+    , renderTime
+    , thatTime
     ) where
 
 import Prelude hiding (writeFile, readFile, head, tail, init, last)
@@ -24,6 +26,10 @@ import Control.Applicative ((<$>), (<*>), pure)
 import Data.Text (Text)
 import Settings.StaticFiles
 import Settings.Development
+import Data.Time.Clock
+import Data.Time.Format
+import System.Locale
+
 --import Data.Time (UTCTime)
 --import Data.Time.Format (formatTime)
 --import Text.Blaze (ToMarkup, toMarkup)
@@ -40,3 +46,7 @@ infixr 5 <>
 --instance ToMarkup UTCTime where
 --    toMarkup a = string (formatTime defaultTimeLocale "%e %B %Y" a)
     
+renderTime = formatTime defaultTimeLocale "%B %e, %Y"
+
+thatTime :: UTCTime
+thatTime = buildTime defaultTimeLocale []

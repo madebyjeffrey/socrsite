@@ -1,0 +1,44 @@
+
+function getData()
+{
+    $.getJSON('/admin/data/profile/'+getIdent(), "",
+        function(data, status, jqXHR)
+        {
+            if (data.valid == true)
+            {
+                console.log(data);
+                console.log($('input#nameField'));
+
+                $('input#nameField').val(data.name);
+                $('input#emailField').val(data.email);
+                $('input#accessField').val(data.access);
+            }
+        });
+}
+
+function postData()
+{
+    $.ajax({
+        url: '/admin/data/profile/'+getIdent(),
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify({
+            name: $('input#nameField').val(),
+            email: $('input#emailField').val(),
+            access: Number($('input#accessField').val())
+            }),
+        contentType: "application/json; charset=utf-8",
+        success: function(o) { console.log(o.status); },
+        error: function() { console.log("error in post"); }
+    });
+}
+
+function getNewsCount()
+{
+    $.getJSON('/admin/data/news/count', "",
+        function(data, status, jqXHR)
+        {
+            console.log(data);
+            console.log("count :" + data.count);
+        });
+}

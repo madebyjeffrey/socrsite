@@ -2,7 +2,6 @@
 module Handler.Home where
 
 import Yesod.Auth
-import Yesod.Auth.BrowserId
 import Web.Authenticate.BrowserId
 
 import Import
@@ -16,9 +15,8 @@ import Import
 -- inclined, or create a single monolithic file.
 getHomeR :: Handler RepHtml
 getHomeR = do
-    maid <- maybeAuthId
-    let browserid = authBrowserId
-    
+    credentials <- maybeAuthId
+   
     newsitems <- runDB $ selectList [] [Desc NewsItemDate]
     let handlerName = "getHomeR" :: Text
     defaultLayout $ do

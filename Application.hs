@@ -11,10 +11,13 @@ import Yesod.Auth
 import Yesod.Default.Config
 import Yesod.Default.Main
 import Yesod.Default.Handlers
-import Network.Wai.Middleware.RequestLogger (logStdout, logStdoutDev)
+import Network.Wai.Middleware.RequestLogger  -- (logStdout, logStdoutDev)
 import qualified Database.Persist.Store
 import Database.Persist.GenericSql (runMigration)
 import Network.HTTP.Conduit (newManager, def)
+import System.IO (openFile, IOMode(AppendMode), Handle )
+import System.IO.Unsafe (unsafePerformIO)
+import Network.Wai (Middleware)
 
 -- Import all relevant handler modules here.
 -- Don't forget to add new modules to your cabal file!
@@ -36,16 +39,25 @@ makeApplication :: AppConfig DefaultEnv Extra -> IO Application
 makeApplication conf = do
     foundation <- makeFoundation conf
     app <- toWaiAppPlain foundation
-    return $ logWare app
+--    file <- openFile "/var/log/socrlog-dev" AppendMode
+    file <- openFile "/tmp/socrlog2-dev" AppendMode
+    return $ logWare file app
   where
-    logWare   = if development then logStdoutDev
-                               else logStdout
+    logWare file  = if development then logStdoutDev
+                                   else logLogFile file     
+                               -- logStdout
+
+
+logLogFile :: Handle -> Middleware
+logLogFile file = unsafePerformIO $ mkRequestLogger def { outputFormat = Apache FromHeader
+                                                        , autoFlush = True
+                                                        , destination = Handle file
+                                                        }
 
 makeFoundation :: AppConfig DefaultEnv Extra -> IO App
 makeFoundation conf = do
     manager <- newManager def
     s <- staticSite
---    dbconf <- withYamlEnvironment "config/sqlite.yml" (appEnv conf)
     dbconf <- withYamlEnvironment "config/postgres.yml" (appEnv conf)
               Database.Persist.Store.loadConfig >>=
               Database.Persist.Store.applyEnv

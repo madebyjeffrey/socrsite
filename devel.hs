@@ -1,5 +1,5 @@
 {-# LANGUAGE PackageImports #-}
-import "socrsite" Application (getApplicationDev)
+import "socr" Application (getApplicationDev)
 import Network.Wai.Handler.Warp
     (runSettings, defaultSettings, settingsPort)
 import Control.Concurrent (forkIO)

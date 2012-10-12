@@ -32,6 +32,9 @@ import Text.Jasmine (minifym)
 import Web.ClientSession (getKey)
 import Text.Hamlet (hamletFile)
 import Data.Text (Text)
+import qualified Data.Text as T
+
+import Network.URL
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -71,6 +74,8 @@ mkYesodData "App" $(parseRoutesFile "config/routes")
 
 type Form x = Html -> MForm App App (FormResult x, Widget)
 
+    
+
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
 instance Yesod App where
@@ -93,6 +98,16 @@ instance Yesod App where
         -- default-layout-wrapper is the entire page. Since the final
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
+        menus <- runDB $ selectList [ MenuOrder !=. -1 ] [ Asc MenuOrder ]
+--        let thisUrl = Just "/"
+        renderfunc <- getUrlRender
+        toMaster <- getRouteToMaster
+        aurl <- getCurrentRoute
+        let thisUrl = case aurl of
+                        Just u -> case importURL $ T.unpack (renderfunc $ toMaster u) of
+                                    Just url -> T.pack (url_path url)
+                                    Nothing -> ""
+                        Nothing -> ""
 
         pc <- widgetToPageContent $ do
             $(widgetFile "normalize")

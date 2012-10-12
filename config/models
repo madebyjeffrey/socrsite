@@ -14,6 +14,12 @@ Document json
     content   Text
     author    Text
     processor Text
-
+--  UniqueDocument slug
+Menu json
+    title     Text
+    order     Int
+    slug      Text
+    url       Text
+        
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)
 -- UTCTime

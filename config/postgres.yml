@@ -7,10 +7,12 @@ Default: &defaults
   poolsize: 10
 
 Development:
+  database: socr3
   <<: *defaults
 
 Testing:
   connstr: service=local
+  database: socr3
   <<: *defaults
 
 Staging:

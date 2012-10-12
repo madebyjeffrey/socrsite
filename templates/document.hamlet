@@ -1,2 +1,2 @@
 
-^{renderedContent}
+#{preEscapedText renderedContent}

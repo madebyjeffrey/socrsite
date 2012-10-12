@@ -1,11 +1,12 @@
 Default: &defaults
   host: "*4" # any IPv4 host
-  port: 443
+  port: 8889
   approot: "http://socr.uwindsor.ca:443"
   copyright: (C) 2012 by Jeffrey Drake
   #analytics: UA-YOURCODE
 
 Development:
+  port: 443
   <<: *defaults
 
 Testing:

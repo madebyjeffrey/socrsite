@@ -1,1 +1,0 @@
-document.getElementById("h2").innerHTML="This text was added by the Javascript part of the homepage widget."

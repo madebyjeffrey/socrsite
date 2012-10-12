@@ -1,14 +1,9 @@
 <section .well style="min-height: 100px">
-    <img src=@{StaticR img_socrlogobig_png} width="100" align="left" style="margin-right: 0.5cm">    
-    <p>Welcome to the Student Operated Computing Resources (SOCR), a student funded computing resource group offering web hosting, shell access, and other technical services upon request.
 
-<p>Your current auth ID: #{show credentials}
-$maybe _ <- credentials
-    <p>
-        <a href=@{AuthR LogoutR}>Logout
-$nothing
-    <p>
-        <a href=@{AuthR LoginR}>Go to the login page
+    #{preEscapedText index}
+
+<!--     <img src=@{StaticR img_socrlogobig_png} width="100" align="left" style="margin-right: 0.5cm">     -->
+<!--    <p>Welcome to the Student Operated Computing Resources (SOCR), a student funded computing resource group offering web hosting, shell access, and other technical services upon request. -->
     
 <h1>News
 
@@ -19,5 +14,5 @@ $else
         <article>
             <h4>#{renderTime (newsItemDate entry)}
             
-            <p>#{newsItemContent entry}
+            <p>#{preEscapedText $ newsItemContent entry}
                 

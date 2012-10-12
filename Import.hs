@@ -12,6 +12,7 @@ module Import
 #endif
     , renderTime
     , thatTime
+    , bareLayout
     ) where
 
 import Prelude hiding (writeFile, readFile, head, tail, init, last)
@@ -30,6 +31,9 @@ import Data.Time.Clock
 import Data.Time.Format
 import System.Locale
 
+import System.Directory
+import qualified Data.Text.IO as TIO
+
 --import Data.Time (UTCTime)
 --import Data.Time.Format (formatTime)
 --import Text.Blaze (ToMarkup, toMarkup)
@@ -46,7 +50,20 @@ infixr 5 <>
 --instance ToMarkup UTCTime where
 --    toMarkup a = string (formatTime defaultTimeLocale "%e %B %Y" a)
     
+renderTime :: FormatTime t => t -> String
 renderTime = formatTime defaultTimeLocale "%B %e, %Y"
 
 thatTime :: UTCTime
 thatTime = buildTime defaultTimeLocale []
+
+bareLayout  :: FilePath -> GHandler sub a RepHtml
+bareLayout file = do
+    exists <- liftIO $ doesFileExist file
+    
+    text <- case exists of
+        True -> liftIO $ TIO.readFile file
+        False -> return "/* no file found */"
+        
+    return $ RepHtml $ toContent text
+    
+    

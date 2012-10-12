@@ -12,7 +12,7 @@ import Data.Aeson
 
 getAdminDataProfileR :: Text -> Handler RepJson
 getAdminDataProfileR email = do
-    credentials <- requireAuthId
+--    credentials <- requireAuthId
 
     user <- runDB $ getBy (UniqueUser email)
     
@@ -33,7 +33,7 @@ postAdminDataProfileR _ = do
     credentials <- requireAuthId
     (data' :: User) <- parseJsonBody_ 
     $(logInfo) "parse OK"
-    tid <- runDB $ updateWhere [ UserEmail ==. credentials, UserEmail ==. (userEmail data') ] [ UserName =. (userName data') ]
+--    tid <- runDB $ updateWhere [ UserEmail ==. credentials, UserEmail ==. (userEmail data') ] [ UserName =. (userName data') ]
 
     jsonToRepJson $ object [ "success" .= True ]
 
@@ -45,7 +45,7 @@ postAdminDataProfileR _ = do
     
 getAdminNewsCountR :: Handler RepJson
 getAdminNewsCountR = do
-    credentials <- requireAuthId
+--    credentials <- requireAuthId
     
     newscount <- runDB $ count [ NewsItemDate !=. thatTime ]
     
@@ -55,21 +55,21 @@ getAdminNewsListR :: Handler RepJson
 getAdminNewsListR = jsonToRepJson $ array ([]::[Int])
 
 getAdminNewsItemR :: Int -> Handler RepJson
-getAdminNewsItemR key = jsonToRepJson $ array ([]::[Int])
+getAdminNewsItemR _ = jsonToRepJson $ array ([]::[Int])
 
 postAdminNewsItemR :: Int -> Handler RepJson
-postAdminNewsItemR key = jsonToRepJson $ array ([]::[Int])
+postAdminNewsItemR _ = jsonToRepJson $ array ([]::[Int])
 
 {-
     creates a new news item
 -}
 putAdminNewsR :: Handler RepJson
 putAdminNewsR = do
-    credentials <- requireAuthId
+--    credentials <- requireAuthId
     
-    (data' :: NewsItem) <- parseJsonBody_
+--    (data' :: NewsItem) <- parseJsonBody_
     
-    runDB $ insert data'
+--    runDB $ insert data'
     
     jsonToRepJson $ object [ "success" .= True ]
 

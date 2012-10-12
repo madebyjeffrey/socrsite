@@ -1,7 +1,9 @@
 exec: ../dist/build/socrsite/socrsite
+#exec: /usr/local/socr/socrsite
 args:
     - production
-host: <<HOST-NOT-SET>>
+host: socr.uwindsor.ca
+port: 443
 
 # Use the following to automatically copy your bundle upon creation via `yesod
 # keter`. Uses `scp` internally, so you can set it to a remote destination

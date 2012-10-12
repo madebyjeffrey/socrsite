@@ -5,15 +5,15 @@
             &nbsp;
             SOCR
         <ul .nav .pull-right>
-            <li class="active">
-                <a href="/">Main
-            <li>
-                <a href="/page/documents">Documents
-            <li>
-                <a href="/page/about">About
-            ^{login curauth}
+            $forall Entity _ menuitem <- menus
+                $if thisUrl == menuUrl menuitem
+                    <li .active>
+                        <a href="#{menuUrl menuitem}">#{menuTitle menuitem}
+                $else
+                    <li>
+                        <a href="#{menuUrl menuitem}">#{menuTitle menuitem}
 
 ^{widget}
                 
 <footer .footer>
-    <aside>Copyright 2012, Jeffrey Drake and Matthew Renaud.
+    <aside>Content (C) 2012 by SOCR
